@@ -3,6 +3,7 @@ const doenv = require('dotenv').config();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth');
+const bookRoutes = require('./routes/book');
 const app = express();
 
 const PORT = process.env.PORT;
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use('/api', authRoutes);
+app.use('/api', bookRoutes);
 
 app.listen(PORT, (req, res)=>{
     console.log(`Server is running on ${PORT}`);

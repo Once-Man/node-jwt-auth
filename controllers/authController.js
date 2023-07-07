@@ -44,19 +44,25 @@ singIn = async(req, res)=> {
                 message: "Invalid Password"
             });
         }else{
-            var token = jwt.sign({
-                id: user.id
-            },process.env.API_SECRET, {
-                expiresIn:86400
-            });
-            res.status(200).send({
-                user: {
-                    id: user._id,
-                    fullName: user.fullName,
-                    email: user.email
-                },
-                message: "Login Successfully",
-                accessToken: token,
+            // var token = jwt.sign({
+            //     id: user.id
+            // },process.env.API_SECRET, {
+            //     expiresIn:86400
+            // });
+            // res.status(200).send({
+            //     user: {
+            //         id: user._id,
+            //         name: user.name,
+            //         role: user.role,
+            //         email: user.email
+            //     },
+            //     message: "Login Successfully",
+            //     accessToken: token,
+            // });
+            const accessToken = jwt.sign({ id:user.id}, process.env.API_SECRET);
+
+            res.json({
+                accessToken
             });
         }
     }
